@@ -2,7 +2,7 @@
  * @Author: TunGuLaMianYG 66915631+TunGuLaMianYG@users.noreply.github.com
  * @Date: 2022-08-16 07:59:32
  * @LastEditors: TunGuLaMianYG 66915631+TunGuLaMianYG@users.noreply.github.com
- * @LastEditTime: 2022-08-16 21:53:28
+ * @LastEditTime: 2022-08-16 22:03:15
  * @FilePath: \goblog\main.go
  */
 package main
@@ -12,5 +12,5 @@ import (
 )
 
 func main() {
-	fmt.Println("test1")
+	fmt.Println("test1sadasdada")
 }
