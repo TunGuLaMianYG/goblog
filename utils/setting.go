@@ -50,7 +50,7 @@ func Init() (err error) {
 	// 指定配置文件名称
 	viper.SetConfigFile("config.yaml")
 	// 指定配置文件的路径
-	viper.AddConfigPath("./config/")
+	viper.AddConfigPath(".")
 	// 读取配置文件
 	err = viper.ReadInConfig()
 	if err != nil {
