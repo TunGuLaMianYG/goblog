@@ -1,12 +1,13 @@
 app:
-  AppMode: debug
-  HttpPort: :3000
+  name: "app"
+  mode: "debug"
+  HttpPort: 3000
 
-database:
-  Db: mysql
-  DbHost: localhost
-  DbPort: 3306
-  DbUser: ginblog
-  DbPassWord: admin123
-  DbName: ginblog
-  
+mysql:
+  host: "127.0.0.1"
+  port: 3306
+  user: "ginblog"
+  password: "admin123"
+  dbname: "ginblog"
+  max_open_conns: 200
+  max_idle_conns: 50

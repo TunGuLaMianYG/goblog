@@ -9,8 +9,28 @@ package main
 
 import (
 	"fmt"
+	"goblog/logger"
+	"goblog/utils"
+
+	"go.uber.org/zap"
 )
 
 func main() {
-	fmt.Println("test1sadasdada")
+
+	// 加载配置文件
+	if err := utils.Init(); err != nil {
+		fmt.Printf("初始化配置文件失败：%v\n", err)
+		return
+	}
+	fmt.Println(utils.Conf)
+	fmt.Println(utils.Conf.LogConfig == nil)
+
+	// 初始化日志
+	if err := logger.Init(utils.Conf.LogConfig); err != nil {
+		fmt.Printf("init logger failed, err:%v\n", err)
+		return
+	}
+	defer zap.L().Sync()
+	zap.L().Debug("Logger init success")
+
 }
