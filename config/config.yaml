@@ -11,3 +11,10 @@ mysql:
   dbname: "ginblog"
   max_open_conns: 200
   max_idle_conns: 50
+
+log:
+  level: "debug"
+  filename: "aap.log"
+  max_size: 300
+  max_age: 30
+  max_backups: 7
