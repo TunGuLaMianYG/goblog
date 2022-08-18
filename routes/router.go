@@ -9,8 +9,8 @@
 package routes
 
 import (
+	v1 "goblog/api/v1"
 	"goblog/logger"
-	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -20,11 +20,15 @@ func Setup() *gin.Engine {
 	r.Use(logger.GinLogger(), logger.GinRecovery(true))
 	router := r.Group("api/v1")
 	{
-		router.GET("hello", func(c *gin.Context) {
-			c.JSON(http.StatusOK, gin.H{
-				"msg": "ok",
-			})
-		})
+		// 用户模块的路由接口
+		router.POST("user/add", v1.AddUser)
+		router.GET("userlist", v1.GetUserList)
+		router.PUT("user/:id", v1.EditUser)
+		router.DELETE("user/:id", v1.DeleteUser)
+
+		// 分类模块的路由接口
+
+		// 文章模块的路由接口
 	}
 	return r
 }
