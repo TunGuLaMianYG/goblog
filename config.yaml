@@ -14,7 +14,7 @@ mysql:
 
 log:
   level: "debug"
-  filename: "aap.log"
+  filename: "app.log"
   max_size: 300
   max_age: 30
   max_backups: 7
