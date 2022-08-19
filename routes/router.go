@@ -21,6 +21,7 @@ func Setup() *gin.Engine {
 	router := r.Group("api/v1")
 	{
 		// 用户模块的路由接口
+		router.GET("user/add", v1.Live)
 		router.POST("user/add", v1.AddUser)
 		router.GET("userlist", v1.GetUserList)
 		router.PUT("user/:id", v1.EditUser)

@@ -11,7 +11,7 @@ package module
 import "gorm.io/gorm"
 
 type Article struct {
-	Catgory Category
+	Catgory Category `gorm:"foreignKey:Cid"`
 	gorm.Model
 	Title string `gorm:"type:varchar(100);not null" json:"title"`
 	// cid 逻辑关联Category文章分类

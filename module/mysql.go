@@ -26,12 +26,12 @@ var err error
 func MySqlInit() (err error) {
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True",
 		viper.GetString("mysql.user"),
-		viper.GetString("msql.password"),
+		viper.GetString("mysql.password"),
 		viper.GetString("mysql.host"),
 		viper.GetInt("mysql.port"),
 		viper.GetString("mysql.dbname"),
 	)
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
+	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{
 		// 禁用默认表名的复数形式
 		NamingStrategy: schema.NamingStrategy{
 			SingularTable: true,

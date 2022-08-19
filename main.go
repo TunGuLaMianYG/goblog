@@ -11,7 +11,7 @@ import (
 	"context"
 	"fmt"
 	"goblog/logger"
-	"goblog/model"
+	"goblog/module"
 	"goblog/routes"
 	"goblog/utils"
 	"log"
@@ -44,11 +44,11 @@ func main() {
 	zap.L().Debug("Logger init success")
 
 	// 初始化 MySql 数据库
-	if err := model.MySqlInit(); err != nil {
+	if err := module.MySqlInit(); err != nil {
 		fmt.Printf("初始化mysql数据库失败:%v\n", err)
 		return
 	}
-	defer model.MySqlClose()
+	defer module.MySqlClose()
 
 	// 注册路由
 	r := routes.Setup()

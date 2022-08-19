@@ -32,5 +32,5 @@ var CodeMsg = map[int]string{
 
 func GetErroMsg(code int) string {
 
-	return codemsg[code]
+	return CodeMsg[code]
 }
