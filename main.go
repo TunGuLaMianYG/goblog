@@ -2,7 +2,7 @@
  * @Author: TunGuLaMianYG 66915631+TunGuLaMianYG@users.noreply.github.com
  * @Date: 2022-08-16 07:59:32
  * @LastEditors: TunGuLaMianYG 66915631+TunGuLaMianYG@users.noreply.github.com
- * @LastEditTime: 2022-08-17 21:30:44
+ * @LastEditTime: 2022-08-22 22:15:14
  * @FilePath: \goblog\main.go
  */
 package main
@@ -14,6 +14,7 @@ import (
 	"goblog/module"
 	"goblog/routes"
 	"goblog/utils"
+	"goblog/utils/snowflake"
 	"log"
 	"net/http"
 	"os"
@@ -21,7 +22,6 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/spf13/viper"
 	"go.uber.org/zap"
 )
 
@@ -54,10 +54,14 @@ func main() {
 	r := routes.Setup()
 	// 启动服务(优雅关机)
 	srv := &http.Server{
-		Addr:    fmt.Sprintf(":%d", viper.GetInt("app.HttpPort")),
+		Addr:    fmt.Sprintf(":%d", utils.Conf.Port),
 		Handler: r,
 	}
 
+	if err := snowflake.Init(utils.Conf.StartTime, utils.Conf.MachineID); err != nil {
+		fmt.Printf("init snowflake failed, err:%v\n", err)
+		return
+	}
 	go func() {
 		// 开启一个gorroutine启动服务
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {

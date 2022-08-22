@@ -2,7 +2,7 @@
  * @Author: TunGuLaMianYG 66915631+TunGuLaMianYG@users.noreply.github.com
  * @Date: 2022-08-17 08:08:05
  * @LastEditors: TunGuLaMianYG 66915631+TunGuLaMianYG@users.noreply.github.com
- * @LastEditTime: 2022-08-17 08:17:13
+ * @LastEditTime: 2022-08-22 22:10:51
  * @FilePath: \goblog\utils\setting.go
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -20,10 +20,13 @@ import (
 var Conf = new(AppConfig)
 
 type AppConfig struct {
-	Name         string `mapstructure:"name"`
-	Mode         string `mapstructure:"mode"`
-	Version      string `mapstructure:"version"`
-	Port         int    `mapstructure:"port"`
+	Name      string `mapstructure:"name"`
+	Mode      string `mapstructure:"mode"`
+	Version   string `mapstructure:"version"`
+	StartTime string `mapstructure:"start_time"`
+	MachineID int64  `mapstructure:"machine_id"`
+	Port      int    `mapstructure:"port"`
+
 	*LogConfig   `mapstructure:"log"`
 	*MySQLConfig `mapstructure:"mysql"`
 }

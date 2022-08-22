@@ -1,13 +1,23 @@
+/*
+ * @Author: TunGuLaMianYG 66915631+TunGuLaMianYG@users.noreply.github.com
+ * @Date: 2022-08-18 21:35:44
+ * @LastEditors: TunGuLaMianYG 66915631+TunGuLaMianYG@users.noreply.github.com
+ * @LastEditTime: 2022-08-22 22:26:17
+ * @FilePath: \goblog\api\v1\user.go
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 package v1
 
 import (
-	"fmt"
 	"goblog/module"
 	"goblog/utils/errmsg"
+	"goblog/utils/snowflake"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
+
+var code int
 
 // 查询用户是否存在
 func UserExist(c *gin.Context) {
@@ -17,26 +27,23 @@ func UserExist(c *gin.Context) {
 // 添加用户
 func AddUser(c *gin.Context) {
 	var user module.User
-	err := c.ShouldBindJSON(&user)
-	fmt.Println(err)
-	if err == nil {
-		fmt.Println(user.Username)
-		code := module.CheckUserByName(user.Username)
-		if code == errmsg.SUCCESS {
-			code = module.CreateUser(&user)
+	c.ShouldBindJSON(&user)
+	code := module.CheckUserByName(user.Username)
+	if code == errmsg.SUCCESS {
+		userID := snowflake.GenID()
+		data := &module.User{
+			UserId:   userID,
+			Email:    user.Email,
+			Username: user.Username,
+			Password: user.Password,
+			Role:     user.Role,
 		}
-		c.JSON(http.StatusOK, gin.H{
-			"status":  code,
-			"data":    user,
-			"message": errmsg.GetErroMsg(code),
-		})
+		code = module.CreateUser(data)
 	}
-
-}
-
-func Live(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
-		"status": "ok",
+		"status":  code,
+		"data":    user,
+		"message": errmsg.GetErroMsg(code),
 	})
 }
 

@@ -2,7 +2,7 @@
  * @Author: TunGuLaMianYG 66915631+TunGuLaMianYG@users.noreply.github.com
  * @Date: 2022-08-17 20:43:48
  * @LastEditors: TunGuLaMianYG 66915631+TunGuLaMianYG@users.noreply.github.com
- * @LastEditTime: 2022-08-17 21:23:53
+ * @LastEditTime: 2022-08-22 22:28:38
  * @FilePath: \goblog\routes\router.go
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -21,7 +21,6 @@ func Setup() *gin.Engine {
 	router := r.Group("api/v1")
 	{
 		// 用户模块的路由接口
-		router.GET("user/add", v1.Live)
 		router.POST("user/add", v1.AddUser)
 		router.GET("userlist", v1.GetUserList)
 		router.PUT("user/:id", v1.EditUser)

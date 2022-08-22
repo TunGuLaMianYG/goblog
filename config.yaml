@@ -1,7 +1,8 @@
-app:
-  name: "app"
-  mode: "debug"
-  HttpPort: 3000
+name: "app"
+mode: "debug"
+start_time: "2022-08-22"
+machine_id: 1
+Port: 3000
 
 mysql:
   host: "127.0.0.1"
