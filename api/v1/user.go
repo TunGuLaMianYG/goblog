@@ -2,7 +2,7 @@
  * @Author: TunGuLaMianYG 66915631+TunGuLaMianYG@users.noreply.github.com
  * @Date: 2022-08-18 21:35:44
  * @LastEditors: TunGuLaMianYG 66915631+TunGuLaMianYG@users.noreply.github.com
- * @LastEditTime: 2022-08-23 08:10:10
+ * @LastEditTime: 2022-08-23 22:09:43
  * @FilePath: \goblog\api\v1\user.go
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -27,11 +27,12 @@ func UserExist(c *gin.Context) {
 // 添加用户
 func AddUser(c *gin.Context) {
 	var user module.User
+	var Data *module.User
 	c.ShouldBindJSON(&user)
 	code := module.CheckUserByName(user.Username)
+	userID := snowflake.GenID()
 	if code == errmsg.SUCCESS {
-		userID := snowflake.GenID()
-		Data := &module.User{
+		Data = &module.User{
 			UserId:   userID,
 			Email:    user.Email,
 			Username: user.Username,
@@ -42,7 +43,7 @@ func AddUser(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"status":  code,
-		"data":    user,
+		"data":    Data,
 		"message": errmsg.GetErroMsg(code),
 	})
 }
