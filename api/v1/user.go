@@ -2,7 +2,7 @@
  * @Author: TunGuLaMianYG 66915631+TunGuLaMianYG@users.noreply.github.com
  * @Date: 2022-08-18 21:35:44
  * @LastEditors: TunGuLaMianYG 66915631+TunGuLaMianYG@users.noreply.github.com
- * @LastEditTime: 2022-08-22 22:26:17
+ * @LastEditTime: 2022-08-23 08:10:10
  * @FilePath: \goblog\api\v1\user.go
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -31,14 +31,14 @@ func AddUser(c *gin.Context) {
 	code := module.CheckUserByName(user.Username)
 	if code == errmsg.SUCCESS {
 		userID := snowflake.GenID()
-		data := &module.User{
+		Data := &module.User{
 			UserId:   userID,
 			Email:    user.Email,
 			Username: user.Username,
 			Password: user.Password,
 			Role:     user.Role,
 		}
-		code = module.CreateUser(data)
+		code = module.CreateUser(Data)
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"status":  code,

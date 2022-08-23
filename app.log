@@ -219,3 +219,15 @@
 {"level":"INFO","time":"2022-08-22T22:28:48.877+0800","caller":"logger/logger.go:70","msg":"/api/v1/user/add","status":200,"method":"POST","path":"/api/v1/user/add","query":"","ip":"127.0.0.1","user-agent":"ApiPOST Runtime +https://www.apipost.cn","errors":"","cost":0.00372}
 {"level":"INFO","time":"2022-08-22T22:29:31.314+0800","caller":"goblog/main.go:80","msg":"关闭服务中"}
 {"level":"INFO","time":"2022-08-22T22:29:31.326+0800","caller":"goblog/main.go:89","msg":"服务已退出"}
+{"level":"DEBUG","time":"2022-08-23T07:59:52.126+0800","caller":"goblog/main.go:44","msg":"Logger init success"}
+{"level":"INFO","time":"2022-08-23T08:00:14.719+0800","caller":"logger/logger.go:70","msg":"/api/v1/user/add","status":200,"method":"POST","path":"/api/v1/user/add","query":"","ip":"127.0.0.1","user-agent":"ApiPOST Runtime +https://www.apipost.cn","errors":"","cost":0.0057213}
+{"level":"INFO","time":"2022-08-23T08:02:54.044+0800","caller":"goblog/main.go:80","msg":"关闭服务中"}
+{"level":"INFO","time":"2022-08-23T08:02:54.044+0800","caller":"goblog/main.go:89","msg":"服务已退出"}
+{"level":"DEBUG","time":"2022-08-23T08:02:56.360+0800","caller":"goblog/main.go:44","msg":"Logger init success"}
+{"level":"INFO","time":"2022-08-23T08:03:11.996+0800","caller":"logger/logger.go:70","msg":"/api/v1/user/add","status":200,"method":"POST","path":"/api/v1/user/add","query":"","ip":"127.0.0.1","user-agent":"ApiPOST Runtime +https://www.apipost.cn","errors":"","cost":0.0040436}
+{"level":"INFO","time":"2022-08-23T08:07:34.274+0800","caller":"goblog/main.go:80","msg":"关闭服务中"}
+{"level":"INFO","time":"2022-08-23T08:07:34.278+0800","caller":"goblog/main.go:89","msg":"服务已退出"}
+{"level":"DEBUG","time":"2022-08-23T08:07:37.352+0800","caller":"goblog/main.go:44","msg":"Logger init success"}
+{"level":"INFO","time":"2022-08-23T08:07:44.158+0800","caller":"logger/logger.go:70","msg":"/api/v1/user/add","status":200,"method":"POST","path":"/api/v1/user/add","query":"","ip":"127.0.0.1","user-agent":"ApiPOST Runtime +https://www.apipost.cn","errors":"","cost":0.0037062}
+{"level":"INFO","time":"2022-08-23T08:09:32.452+0800","caller":"goblog/main.go:80","msg":"关闭服务中"}
+{"level":"INFO","time":"2022-08-23T08:09:32.461+0800","caller":"goblog/main.go:89","msg":"服务已退出"}
