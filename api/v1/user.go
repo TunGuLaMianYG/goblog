@@ -2,7 +2,7 @@
  * @Author: TunGuLaMianYG 66915631+TunGuLaMianYG@users.noreply.github.com
  * @Date: 2022-08-18 21:35:44
  * @LastEditors: TunGuLaMianYG 66915631+TunGuLaMianYG@users.noreply.github.com
- * @LastEditTime: 2022-08-24 08:09:01
+ * @LastEditTime: 2022-08-24 22:07:18
  * @FilePath: \goblog\api\v1\user.go
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -53,20 +53,23 @@ func AddUser(c *gin.Context) {
 
 // 查询用户列表
 func GetUserList(c *gin.Context) {
-	pageSize, _ := strconv.Atoi(c.Query("pagesize"))
-	pageNumber, _ := strconv.Atoi(c.Query("pageNumber"))
-	// 如果pagesize=-1不生效，可以参考gorm文档
-	if pageSize == 0 {
-		pageSize = -1
+	pagesize, _ := strconv.Atoi(c.Query("pagesize"))
+	pagenum, _ := strconv.Atoi(c.Query("pagenum"))
+
+	if pagesize == 0 {
+		pagesize = 10
 	}
-	if pageNumber == 0 {
-		pageNumber = -1
+	if pagenum == 0 {
+		pagenum = 1
 	}
-	data := module.GetUsers(pageSize, pageNumber)
-	code = errmsg.SUCCESS
+	users := module.GetUsers(pagesize, pagenum)
+	code := errmsg.SUCCESS
+	if users == nil {
+		code = errmsg.ERROR
+	}
 	c.JSON(http.StatusOK, gin.H{
 		"status":  code,
-		"data":    data,
+		"data":    users,
 		"message": errmsg.GetErroMsg(code),
 	})
 }

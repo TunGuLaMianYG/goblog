@@ -2,17 +2,20 @@
  * @Author: TunGuLaMianYG 66915631+TunGuLaMianYG@users.noreply.github.com
  * @Date: 2022-08-17 21:38:40
  * @LastEditors: TunGuLaMianYG 66915631+TunGuLaMianYG@users.noreply.github.com
- * @LastEditTime: 2022-08-24 08:10:34
+ * @LastEditTime: 2022-08-30 08:15:03
  * @FilePath: \goblog\model\User.go
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 package module
 
 import (
+	"encoding/base64"
 	"fmt"
 	"goblog/utils/errmsg"
 	"time"
 
+	"go.uber.org/zap"
+	"golang.org/x/crypto/scrypt"
 	"gorm.io/gorm"
 )
 
@@ -23,8 +26,8 @@ type User struct {
 	ID        uint `gorm:"primarykey"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
-	UserId    int64  `gorm:"column:user_id;type:bigint(20);NOT NULL" json:"user_id"`
-	Username  string `gorm:"column:username;type:varchar(64);NOT NULL" json:"username"`
+	UserId    int64  `gorm:"column:user_id;type:bigint(20);NOT NULL" json:"user_id" binding:"required"`
+	Username  string `gorm:"column:username;type:varchar(64);NOT NULL" json:"username" binding:"required"`
 	Password  string `gorm:"column:password;type:varchar(64);NOT NULL" json:"password"`
 	Email     string `gorm:"column:email;type:varchar(64)" json:"email"`
 	Role      int    `gorm:"type:int" json:"role"`
@@ -62,9 +65,9 @@ func CreateUser(data *User) int {
 }
 
 // 查询用户列表
-func GetUsers(pageSize, pageNumber int) []User {
-	var users []User
-	err = db.Limit(pageSize).Offset((pageNumber - 1) * pageSize).Find(&users).Error
+func GetUsers(pagesize, pagenum int) []User {
+	users := []User{}
+	err = db.Limit(pagesize).Offset((pagenum - 1) * pagesize).Find(&users).Error
 	if err != nil && err != gorm.ErrRecordNotFound {
 		return nil
 	}
@@ -74,3 +77,17 @@ func GetUsers(pageSize, pageNumber int) []User {
 // 编辑用户
 
 // 删除用户
+
+// 密码加密
+func ScryptPw(password string) string {
+	const KeyLen = 10
+	salt := make([]byte, 8)
+	salt = []byte{12, 32, 4, 6, 66, 22, 222, 11}
+
+	HashPw, err := scrypt.Key([]byte(password), salt, 16384, 8, 1, KeyLen)
+	if err != nil {
+		zap.L().Error("密码加密失败：%v\n", zap.Error(err))
+	}
+	fpw := base64.StdEncoding.EncodeToString(HashPw)
+	return fpw
+}
